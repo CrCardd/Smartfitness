@@ -77,7 +77,7 @@ public class MainView : View
                 }
             },
             q4 = new() {
-                Text = "Porquê é bom separar os dados entre treinamento e testes?",
+                Text = "Porque é bom separar os dados entre treinamento e testes?",
                 Competences = new() {
                     [c3] = .2f,
                     [c4] = .2f,
@@ -92,7 +92,95 @@ public class MainView : View
                 }
             },
             q5 = new() {
-                Text = ""
+                Text = "Aponte um problema de Aprendizado Supervisionado e Não Supervisionado, respectivamente:",
+                Competences = new() {
+                    [c6] = 1f,
+                    [c7] = 1f
+                },
+                Alternatives = new() {
+                    ["Classificação e Ensemble"] = .2f,
+                    ["Regressão e Classificação"] = .5f,
+                    ["Clusterização e Classificação"] = 0f,
+                    ["Regressão e Clusterização"] = 1f
+                }
+            },
+            q6 = new() {
+                Text = "Você deseja criar uma aplicação de ML para descobrir que mês do ano" +
+                    " determinados eventos irão ocorrer. Adicionalmente o evento pode ser apontado" +
+                    " como só podendo ocorrer em algum momemnto do ano que vem e também pode ser" +
+                    " apontado como não vai ocorrer, não se pode saber e vai acontecer em algum mes específico" +
+                    " com baixa probabilidade. Quantas classes este problema de classificação possui?",
+                Competences = new() {
+                    [c8] = 1f
+                },
+                Alternatives = new() {
+                    ["12"] = .2f,
+                    ["5"] = .0f,
+                    ["16"] = .7f,
+                    ["27"] = 1f
+                }
+            },
+            q7 = new() {
+                Text = "Para cada imagem a seguir aponte qual algoritmo melhor se correlaciona:",
+                Images = new() { Bitmap.FromFile("q7.png") },
+                Competences = new() {
+                    [c9] = .7f,
+                    [c11] = .3f,
+                    [c12] = .3f,
+                    [c13] = .3f,
+                },
+                Alternatives = new() {
+                    ["SVM; Decision Tree; Clustering; SVM"] = .5f,
+                    ["SVM; Decision Tree; KMeans; Regressão Linear"] = 1f,
+                    ["Regressão Linear; Decision Tree; KMeans; SVM"] = 0.5f,
+                    ["Regressão Linear; Matriz de Confusão; KMeans; Regressão Linear"] = 0f,
+                }
+            },
+            q8 = new() {
+                Text = "Você está programando e encontrou o seguinte erro: "+
+                    "\"ValueError: could not convert string to float: 'True'.\", o que você entende do erro:",
+                Competences = new() {
+                    [c9] = .3f,
+                    [c10] = 1f,
+                    [c11] = .6f
+                },
+                Alternatives = new() {
+                    ["Você não usou um Label Encoder no preprocessamento"] = 1f,
+                    ["Você não deveria usar uma Decision Tree para esse problema"] = 0f,
+                    ["Você não deveria usar um Naive Bayes para esse problema"] = 0f,
+                    ["Você está resolvendo um problema de regressão como se fosse de Classificação"] = .2f
+                }
+            },
+            q9 = new() {
+                Text = "Para os próximos três problemas aponte seus nomes: " +
+                    "Descobrir se um paciente tem ou não uma doença; " +
+                    "Calcular o valor de uma ação ao longo do tempo; " +
+                    "Identificar perfil dos usuários em uma plataforma de Streaming.", 
+                Competences = new() {
+                    [c11] = .4f,
+                    [c12] = .4f,
+                    [c13] = .4f
+                },
+                Alternatives = new() {
+                    ["Classificação; Classificação; Classificação"] = 0f,
+                    ["Clusterização; Regressão; Classificação"] = .5f,
+                    ["Classificação; Regressão; Classificação"] = .6f,
+                    ["Classificação; Regressão; Clusterização"] = 1f
+                }
+            },
+            q10 = new() {
+                Text = "A respeito de Ensemble, aponte o incorreto:", 
+                Competences = new() {
+                    [c14] = 1f,
+                    [c12] = .3f,
+                    [c13] = .3f
+                },
+                Alternatives = new() {
+                    ["Boosting é ótimo para regressão ao trabalhar sobre os erros dos modelos anteriores"] = 0f,
+                    ["Boosting é altamente paralelizável"] = 1f,
+                    ["Bagging é altamente paralelizável"] = .5f,
+                    ["Clusterização com Ensemble é possível com uma 'votação' entre os modelos para decidir o cluster de um dado"] = 0f
+                }
             }
             ;
         
@@ -105,7 +193,8 @@ public class MainView : View
                 c13, c14, c15
             },
             Questions = new() {
-                q1, q2, q3, q4
+                q1, q2, q3, q4, q5,
+                q6, q7, q8, q9, q10
             }
         };
     }
@@ -206,13 +295,13 @@ public class MainView : View
         foreach (var alt in question.Alternatives.Keys)
         {
             if (selected == index)
-                g.FillRectangle(5, y, g.Width - 10, jump * alt.Length / spacing, Brushes.Black);
+                g.FillRectangle(5, y, g.Width - 10, jump * (alt.Length / spacing + 1), Brushes.Black);
             g.DrawText(
                 new Rectangle(5, y, g.Width - 10, g.Height - y - 5),
                 font, StringAlignment.Near, StringAlignment.Near,
                 selected == index ? Brushes.White : Brushes.Black, alt
             );
-            y += jump * alt.Length / spacing;
+            y += jump * (alt.Length / spacing + 1);
             index++;
         }
     }
