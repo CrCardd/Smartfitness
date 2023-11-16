@@ -2,6 +2,7 @@ using System.Linq;
 using System.Drawing;
 
 using Pamella;
+using System.Diagnostics;
 
 App.Open<MainView>();
 
@@ -308,6 +309,39 @@ public class MainView : View
 
     private void showResult(IGraphics g)
     {
+        int y = 5;
+        foreach (var comp in test.Competences)
+        {
+            g.DrawText(
+                new Rectangle(5, y, g.Width - 10, g.Height - 10),
+                new Font("Arial", 20), StringAlignment.Near, StringAlignment.Near,
+                comp.Title
+            );
 
+            comp.Status = comp.StatusValue switch
+            {
+                < .4f => CompetenceStatus.Unfit,
+                > .4f and < .7f => CompetenceStatus.UnderDevelopment,
+                _ => CompetenceStatus.Fit
+            };
+
+            g.DrawText(
+                new Rectangle(5, y, g.Width - 10, g.Height - 10),
+                new Font("Arial", 20), StringAlignment.Far, StringAlignment.Near,
+                comp.Status switch {
+                    CompetenceStatus.Unfit => Brushes.Red,
+                    CompetenceStatus.UnderDevelopment => Brushes.Yellow,
+                    CompetenceStatus.Fit => Brushes.Green,
+                    _ => Brushes.Black
+                },
+                comp.Status switch {
+                    CompetenceStatus.Unfit => "Inapto",
+                    CompetenceStatus.UnderDevelopment => "Em Desenvolvimento",
+                    CompetenceStatus.Fit => "Apto",
+                    _ => ""
+                }
+            );
+            y += 40;
+        }
     }
 }

@@ -5,7 +5,7 @@ public enum CompetenceStatus
 {
     Unknow = 0,
     Unfit = 1,
-    UnderDevelopmetn = 2,
+    UnderDevelopment = 2,
     Fit = 3,
 }
 
