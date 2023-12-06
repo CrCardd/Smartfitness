@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.CodeDom;
 using System.Drawing;
+using System.Linq;
+using System.ComponentModel;
 
 public class ExamFileReader
 {
@@ -56,9 +58,80 @@ public class ExamFileReader
     
     public Test GetTest()
     {
-        Test test = new Test();
+        Test test = new Test
+        {
+            Competences = new()
+        };
 
+        var lines = data.Split('\n');
 
-        return null;
+        foreach (var line in lines)
+            process(line, test);
+        
+        if (q is not null)
+            test.Questions.Add(q);
+
+        return test;
+    }
+
+    Question q = null;
+    Dictionary<int, Competence> competences = new();
+    private void process(string line, Test test)
+    {
+        if (q is not null)
+        {
+            if (line.StartsWith("\t"))
+                processQuestion(line.Substring(1));
+            else
+            {
+                test.Questions.Add(q);
+                q = null;
+            }
+            return;
+        }
+
+        if (line.StartsWith("DataPath"))
+        {
+            test.DataPath = getInlineValue(line);
+            return;
+        }
+
+        if (line.StartsWith("c"))
+        {
+            Competence c = new(getInlineValue(line));
+            test.Competences.Add(c);
+            competences.Add(getItemValue(line), c);
+            return;
+        }
+
+        if (line.StartsWith("q"))
+        {
+            q = new();
+            return;
+        }
+    }
+
+    private void processQuestion(string line)
+    {
+        
+    }
+
+    private int getItemValue(string line)
+    {
+        var characters = line
+            .SkipWhile(c => !char.IsNumber(c))
+            .TakeWhile(c => char.IsNumber(c));
+        return int.Parse(
+            string.Concat(characters)
+        );
+    }
+
+    private string getInlineValue(string line)
+    {
+        var characters = line
+            .SkipWhile(c => c != '=')
+            .Skip(1)
+            .SkipWhile(c => char.IsWhiteSpace(c));
+        return string.Concat(characters);
     }
 }
