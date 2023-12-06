@@ -41,6 +41,9 @@ public class MainView : View
 
                 case Input.Down:
 
+                    if (this.test is null)
+                        break;
+
                     if (current >= this.test.Questions.Count)
                         break;
 
@@ -53,6 +56,9 @@ public class MainView : View
                     break;
                 
                 case Input.Up:
+
+                    if (this.test is null)
+                        break;
 
                     if (current >= this.test.Questions.Count)
                         break;
@@ -78,20 +84,29 @@ public class MainView : View
                 
                 case Input.Enter:
 
+                    if (this.test is null)
+                        break;
+                    
                     if (current >= this.test.Questions.Count)
                         break;
 
-                    question = test.Questions[current];
-                    altCount = question.Alternatives.Count;
-                    
-                    var alt = question
-                        .Alternatives.Keys.ToArray()[selected];
-                    var correctness = question.Alternatives[alt];
+                    try
+                    {
+                        question = test.Questions[current];
+                        altCount = question.Alternatives.Count;
+                        
+                        var alt = question
+                            .Alternatives.Keys.ToArray()[selected];
+                        var correctness = question.Alternatives[alt];
 
-                    foreach (var comp in question.Competences.Keys)
-                        comp.StatusValue += correctness
-                            * question.Competences[comp];
-                    current++;
+                        foreach (var comp in question.Competences.Keys)
+                            comp.StatusValue += correctness
+                                * question.Competences[comp];
+                        current++;
+                    }
+                    catch {
+
+                    }
 
                     break;
             }
@@ -104,7 +119,7 @@ public class MainView : View
 
         if (this.test is null)
             return;
-
+        
         if (current >= this.test.Questions.Count)
         {
             showResult(g);
