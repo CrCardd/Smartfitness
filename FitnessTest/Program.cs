@@ -3,6 +3,8 @@ using System.Drawing;
 
 using Pamella;
 using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 
 App.Open<MainView>();
 
@@ -187,6 +189,7 @@ public class MainView : View
         
         this.test = new()
         {
+            DataPath = @"S:\COM\Human_Resources\01.Engineering_Tech_School\02.Internal\1 - Meio oficiais\2 - MEIO OFICIAL 2023\Trevisan",
             Competences = new() { 
                 c1, c2, c3, c4,
                 c5, c6, c7, c8,
@@ -214,7 +217,7 @@ public class MainView : View
             int altCount = question.Alternatives.Count;
             
             switch (key)
-            {   
+            {
                 case Input.Down:
                     selected++;
                     if (selected >= altCount)
