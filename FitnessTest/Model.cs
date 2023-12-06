@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 using Csv = System.Collections.Generic.List<System.Collections.Generic.List<string>>;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 public enum CompetenceStatus
 {
@@ -48,6 +49,23 @@ public class Test
         byte[] bytes = new byte[12];
         Random.Shared.NextBytes(bytes);
         this.code = Convert.ToBase64String(bytes);
+    }
+
+    public static async Task<Test> LoadFromExamFile(string path)
+    {
+        try
+        {
+            if (!File.Exists(path))
+                return null;
+            
+            ExamFileReader fileReader = await ExamFileReader.Open(path);
+            return fileReader.GetTest();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+            return null;
+        }
     }
 
     public async Task Save()
