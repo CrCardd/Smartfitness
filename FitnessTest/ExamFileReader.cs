@@ -113,17 +113,38 @@ public class ExamFileReader
             Competences = new()
         };
         
-        while (it.MoveNext())
+        bool bypass = false;
+        while (bypass || it.MoveNext())
         {
-            var line = it.Current.Trim();
-            if (line.StartsWith(";"))
-                break;
+            if (bypass)
+                bypass = false;
+            
+            var line = it.Current;
+            if (line.Length == 0)
+                return question;
+
+            int currentLevel = 
+                line[0] == '\t'
+                    ? 4 * line
+                        .TakeWhile(c => c == '\t')
+                        .Count()
+                    : line
+                        .TakeWhile(c => c == ' ')
+                        .Count();
+            
+            if (currentLevel < 4)
+                return question;
+            
+            line = line.Trim();
 
             if (line.StartsWith("Text"))
             {
                 var value = getInlineValue(line);
                 if (value == string.Empty)
+                {
                     value = getValue(it, 8);
+                    bypass = true;
+                }
                 question.Text = value;
                 continue;
             }
@@ -132,21 +153,25 @@ public class ExamFileReader
             {
                 question.Images = new List<Image>
                 {
-                    Bitmap.FromFile(getInlineValue(line))
+                    Bitmap.FromFile(getInlineValue(line).Trim())
                 };
                 continue;                
             }
 
             if (line.StartsWith("Competences"))
             {
-                fillCompetences(question.Competences, it, 8);
+                var newLevel = fillCompetences(question.Competences, it, 8);
+                if (newLevel == 0)
+                    return question;
                 continue;
             }
 
 
             if (line.StartsWith("Alternatives"))
             {
-                fillAlternatives(question.Alternatives, it, 8);
+                var newLevel = fillAlternatives(question.Alternatives, it, 8);
+                if (newLevel == 0)
+                    return question;
                 continue;
             }
         }
@@ -154,11 +179,13 @@ public class ExamFileReader
         return question;
     }
 
-    private void fillAlternatives(Dictionary<string, float> dict, IEnumerator<string> it, int level)
+    private int fillAlternatives(Dictionary<string, float> dict, IEnumerator<string> it, int level)
     {
         while (it.MoveNext())
         {
             var line = it.Current;
+            if (line.Length == 0)
+                return 0;
 
             int currentLevel = 
                 line[0] == '\t'
@@ -170,7 +197,7 @@ public class ExamFileReader
                         .Count();
 
             if (currentLevel != level)
-                break;
+                return currentLevel;
             
             var alt = string.Concat(line
                 .TakeWhile(c => c != '=')
@@ -186,15 +213,18 @@ public class ExamFileReader
 
             dict[alt] = weight;
         }
+        return 0;
     }
 
-    private void fillCompetences(Dictionary<Competence, float> dict, IEnumerator<string> it, int level)
+    private int fillCompetences(Dictionary<Competence, float> dict, IEnumerator<string> it, int level)
     {
         int count = 0;
         List<Competence> comps = new List<Competence>();
         while (it.MoveNext())
         {
             var line = it.Current;
+            if (line.Length == 0)
+                return 0;
 
             int currentLevel = 
                 line[0] == '\t'
@@ -206,7 +236,7 @@ public class ExamFileReader
                         .Count();
 
             if (currentLevel != level)
-                break;
+                return currentLevel;
             
             var text = line
                 .Trim();
@@ -227,6 +257,7 @@ public class ExamFileReader
         {
             dict[comp] /= (float)count;
         }
+        return 0;
     }
 
     private string getValue(IEnumerator<string> it, int level)

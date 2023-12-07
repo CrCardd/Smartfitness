@@ -20,12 +20,13 @@ q1 =
     Text = Aponte a alternativa incorreta sobre o conceito de DataSet:
     Competences = 
         c1 = 8
+    
     Alternatives = 
         Um csv pode ser usado para armazenar dados de um dataset = 0
         Um json pode ser usado para armazenar dados de um dataset = 3
         Um zip com imagens pode ser usado para armazenar dados de um dataset = 6
         Um dataset precisa estar com todos os dados para ser considerado um dataset = 1
-    ;
+
 
 q2 = 
     Text = Aponte a questão que melhor estrutura o processod e ML:
@@ -38,14 +39,15 @@ q2 =
         Análise -> Tratamento -> Treinamento -> Verificação -> Repita até a satisfação -> Produto = 1
         Tratamento -> Análise -> Treinamento -> Produto = 5
         Treinamento -> Análise -> Produto = 0
-    ;
+
 
 q3 = 
     Text =
         Considere as seguintes matrizes de confusão Em 4 casos diferentes será mostrado a matriz
         quando observado dados em relação a predição dos dados de treinamento e teste Uma linha azul
         apontará altos valores na matriz de confusão Para os casos A B C e D respectivamente:
-    Images =  q3.png 
+    
+    Images = q3.png
     Competences = 
         c3 = 8
         c4 = 8
@@ -56,7 +58,7 @@ q3 =
         Possível Bug; Overfitting; Underfitting; Underfitting = 0
         Sucesso; Underfitting; Possível Bug; Overfitting = 1
         Overfitting; Overfitting; Underfitting; Underfitting = 2
-    ;
+
 
 q4 = 
     Text = Porque é bom separar os dados entre treinamento e testes?
@@ -71,7 +73,7 @@ q4 =
         Pois reduz o Overfitting = 1
         Pois reduz o Underfitting = 4
         Pois aumenta a precisão nos dados de teste = 0
-    ;
+
 
 q5 = 
     Text = Aponte um problema de Aprendizado Supervisionado e Não Supervisionado respectivamente:
@@ -84,7 +86,6 @@ q5 =
         Regressão e Classificação = 5
         Clusterização e Classificação = 0
         Regressão e Clusterização = 1
-    ;
 
 q6 = 
     Text = Você deseja criar uma aplicação de ML para descobrir que mês do ano
@@ -100,7 +101,6 @@ q6 =
         5 = 0
         16 = 7
         27 = 1
-    ;
 
 
 q7 = 
@@ -117,7 +117,6 @@ q7 =
         SVM; Decision Tree; KMeans; Regressão Linear = 1
         Regressão Linear; Decision Tree; KMeans; SVM = 05
         Regressão Linear; Matriz de Confusão; KMeans; Regressão Linear = 0
-    ;
 
 
 q8 = 
@@ -134,7 +133,6 @@ q8 =
         Você não deveria usar uma Decision Tree para esse problema = 0
         Você não deveria usar um Naive Bayes para esse problema = 0
         Você está resolvendo um problema de regressão como se fosse de Classificação = 2
-    ;
 
 
 q9 = 
@@ -153,7 +151,6 @@ q9 =
         Clusterização; Regressão; Classificação = 5
         Classificação; Regressão; Classificação = 6
         Classificação; Regressão; Clusterização = 1
-    ;
 
 
 q10 = 
@@ -168,4 +165,3 @@ q10 =
         Boosting é altamente paralelizável = 1
         Bagging é altamente paralelizável = 5
         Clusterização com Ensemble é possível com uma 'votação' entre os modelos para decidir o cluster de um dado = 0
-    ;
