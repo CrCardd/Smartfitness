@@ -23,10 +23,15 @@ public class MainView : View
         
     }
 
-    protected override void OnStart(IGraphics g)
+    protected override async void OnStart(IGraphics g)
     {
+        this.test = await Test.LoadFromExamFile(
+            @"S:\COM\Human_Resources\01.Engineering_Tech_School\02.Internal\1 - Meio oficiais\2 - MEIO OFICIAL 2023\Trevisan\prova angular\angular.exam"
+        );
+        this.test.InstanceStudentName = File.ReadAllText(".name");
+        
         AlwaysInvalidateMode();
-        g.SubscribeKeyDownEvent(async key => {
+        g.SubscribeKeyDownEvent(key => {
             if (key == Input.Escape)
                 App.Close();
             
@@ -35,10 +40,6 @@ public class MainView : View
             
             switch (key)
             {
-                case Input.O:
-                    this.test = await Test.LoadFromExamFile("../testExamples/machine learning.exam");
-                    break;
-
                 case Input.Down:
 
                     if (this.test is null)
@@ -170,7 +171,7 @@ public class MainView : View
         }
     }
 
-    private void showResult(IGraphics g)
+    private async void showResult(IGraphics g)
     {
         int y = 5;
         foreach (var comp in test.Competences)
@@ -206,5 +207,7 @@ public class MainView : View
             );
             y += 40;
         }
+        
+        await this.test.Save();
     }
 }

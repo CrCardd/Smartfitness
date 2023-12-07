@@ -6,9 +6,8 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-using Csv = System.Collections.Generic.List<System.Collections.Generic.List<string>>;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Csv = System.Collections.Generic.List<System.Collections.Generic.List<string>>;
 
 public enum CompetenceStatus
 {
@@ -39,6 +38,7 @@ public class Question
 public class Test
 {
     private string code;
+    public bool Saved { get; set; } = false;
     public string DataPath { get; set; }
     public string InstanceStudentName { get; set; }
     public List<Question> Questions { get; set; }
@@ -70,6 +70,10 @@ public class Test
 
     public async Task Save()
     {
+        if (this.Saved)
+            return;
+        this.Saved = true;
+
         var dataFolder = Path.Combine(this.DataPath, "fitness");
         var file = Path.Combine(dataFolder, "test.csv");
 
@@ -139,9 +143,12 @@ public class Test
     private async Task commit(string dataFolder, Func<Task> operation)
     {
         await waitLock(dataFolder);
+        MessageBox.Show("locked");
         await waitPriority(dataFolder);
+        MessageBox.Show("priority get");
         await operation();
         await waitUnlock(dataFolder);
+        MessageBox.Show("unlock");
     }
 
     private async Task waitUnlock(string dataFolder)
@@ -187,9 +194,11 @@ public class Test
     {
         try
         {
+            MessageBox.Show("tryLock'");
             var hasLock = searchLock(dataFolder);
             if (hasLock)
                 return false;
+            MessageBox.Show("nothasLock'");
             
             var count = lockCount(dataFolder);
 
@@ -200,6 +209,7 @@ public class Test
         }
         catch
         {
+            MessageBox.Show("error'");
             return false;
         }
     }
@@ -246,6 +256,7 @@ public class Test
         
         foreach (var file in files)
         {
+            MessageBox.Show(file);
             if (!file.EndsWith(".lock"))
                 continue;
             

@@ -1,16 +1,11 @@
 using System;
 using System.IO;
-using System.IO.Compression;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.CodeDom;
-using System.Drawing;
 using System.Linq;
-using System.ComponentModel;
-using System.Net.Quic;
 using System.Text;
-using System.Net;
+using System.Drawing;
+using System.IO.Compression;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 public class ExamFileReader
 {
@@ -306,6 +301,6 @@ public class ExamFileReader
             .SkipWhile(c => c != '=')
             .Skip(1)
             .SkipWhile(c => char.IsWhiteSpace(c));
-        return string.Concat(characters);
+        return string.Concat(characters).Trim();
     }
 }
