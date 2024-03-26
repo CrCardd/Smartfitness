@@ -25,10 +25,20 @@ public class MainView : View
 
     protected override async void OnStart(IGraphics g)
     {
-        this.test = await Test.LoadFromExamFile(
-            @"S:\COM\Human_Resources\01.Engineering_Tech_School\02.Internal\1 - Meio oficiais\2 - MEIO OFICIAL 2023\Trevisan\prova angular\angular.exam"
-        );
-        this.test.InstanceStudentName = File.ReadAllText(".name");
+        try
+        {
+            var crrPath = Environment.CurrentDirectory;
+            var files = Directory.GetFiles(crrPath);
+            var file = files.FirstOrDefault(f => 
+                Path.GetExtension(f) == ".exam"
+            );
+            this.test = await Test.LoadFromExamFile(file);
+            this.test.InstanceStudentName = File.ReadAllText(".name");
+        }
+        catch
+        {
+            App.Close();
+        }
         
         AlwaysInvalidateMode();
         g.SubscribeKeyDownEvent(key => {
