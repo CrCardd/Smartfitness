@@ -207,9 +207,9 @@ public class Test
             await File.WriteAllTextAsync(location, "");
             return true;
         }
-        catch
+        catch (Exception ex)
         {
-            MessageBox.Show("error'");
+            MessageBox.Show($"error: {ex.Message}");
             return false;
         }
     }

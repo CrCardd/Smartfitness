@@ -208,12 +208,7 @@ public class MainView : View
                     CompetenceStatus.Fit => Brushes.Green,
                     _ => Brushes.Black
                 },
-                comp.Status switch {
-                    CompetenceStatus.Unfit => "Inapto",
-                    CompetenceStatus.UnderDevelopment => "Em Desenvolvimento",
-                    CompetenceStatus.Fit => "Apto",
-                    _ => ""
-                }
+                $"{Math.Round(comp.StatusValue * 100, 1)}%"
             );
             y += 40;
         }
