@@ -88,7 +88,8 @@ q5 =
         Regressão e Clusterização = 1
 
 q6 = 
-    Text = Você deseja criar uma aplicação de ML para descobrir que mês do ano
+    Text = 
+        Você deseja criar uma aplicação de ML para descobrir que mês do ano
         determinados eventos irão ocorrer Adicionalmente o evento pode ser apontado
         como só podendo ocorrer em algum momemnto do ano que vem e também pode ser
         apontado como não vai ocorrer não se pode saber e vai acontecer em algum mes específico

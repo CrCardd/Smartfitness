@@ -185,6 +185,8 @@ public class MainView : View
 
     private async void showResult(IGraphics g)
     {
+        test.Finish();
+        
         int y = 5;
         foreach (var comp in test.Competences)
         {
@@ -194,19 +196,12 @@ public class MainView : View
                 comp.Title
             );
 
-            comp.Status = comp.StatusValue switch
-            {
-                < .4f => CompetenceStatus.Unfit,
-                > .4f and < .7f => CompetenceStatus.UnderDevelopment,
-                _ => CompetenceStatus.Fit
-            };
-
             g.DrawText(
                 new Rectangle(5, y, g.Width - 10, g.Height - 10),
                 new Font("Arial", 20), StringAlignment.Far, StringAlignment.Near,
                 comp.Status switch {
                     CompetenceStatus.Unfit => Brushes.Red,
-                    CompetenceStatus.UnderDevelopment => Brushes.Yellow,
+                    CompetenceStatus.UnderDevelopment => Brushes.Orange,
                     CompetenceStatus.Fit => Brushes.Green,
                     _ => Brushes.Black
                 },

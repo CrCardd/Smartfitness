@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using System.Windows.Forms;
-using Csv = System.Collections.Generic.List<System.Collections.Generic.List<string>>;
+using Csv = System.Collections.Generic.List<
+    System.Collections.Generic.List<string>>;
 
 public enum CompetenceStatus
 {
@@ -39,6 +40,7 @@ public class Test
 {
     private string code;
     public bool Saved { get; set; } = false;
+    public bool Finished { get; set; } = false;
     public string DataPath { get; set; }
     public string InstanceStudentName { get; set; }
     public List<Question> Questions { get; set; }
@@ -69,6 +71,36 @@ public class Test
         {
             MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
             return null;
+        }
+    }
+
+    public void Finish()
+    {
+        if (Finished)
+            return;
+        Finished = true;
+
+        foreach (var comp in Competences)
+        {
+            float maxValue = 0f;
+            
+            foreach (var question in this.Questions)
+            {
+                if (!question.Competences.ContainsKey(comp))
+                    continue;
+                
+                maxValue += question.Competences[comp]
+                    * question.Alternatives.Max(a => a.Value);
+            }
+
+            comp.StatusValue /= maxValue;
+
+            comp.Status = comp.StatusValue switch
+            {
+                < .4f => CompetenceStatus.Unfit,
+                > .4f and < .7f => CompetenceStatus.UnderDevelopment,
+                _ => CompetenceStatus.Fit
+            };
         }
     }
 
