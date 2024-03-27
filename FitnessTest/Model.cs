@@ -48,7 +48,11 @@ public class Test
     {
         byte[] bytes = new byte[12];
         Random.Shared.NextBytes(bytes);
-        this.code = Convert.ToBase64String(bytes);
+        this.code = Convert.ToBase64String(bytes)
+            .ToLower()
+            .Replace("+", "")
+            .Replace("/", "")
+            .Replace("=", "");
     }
 
     public static async Task<Test> LoadFromExamFile(string path)
@@ -75,6 +79,9 @@ public class Test
         this.Saved = true;
 
         var dataFolder = Path.Combine(this.DataPath, "fitness");
+        if (!Directory.Exists(dataFolder))
+            Directory.CreateDirectory(dataFolder);
+
         var file = Path.Combine(dataFolder, "test.csv");
 
         await commit(dataFolder, async () => await save(file));
@@ -143,12 +150,9 @@ public class Test
     private async Task commit(string dataFolder, Func<Task> operation)
     {
         await waitLock(dataFolder);
-        MessageBox.Show("locked");
         await waitPriority(dataFolder);
-        MessageBox.Show("priority get");
         await operation();
         await waitUnlock(dataFolder);
-        MessageBox.Show("unlock");
     }
 
     private async Task waitUnlock(string dataFolder)
@@ -194,11 +198,9 @@ public class Test
     {
         try
         {
-            MessageBox.Show("tryLock'");
             var hasLock = searchLock(dataFolder);
             if (hasLock)
                 return false;
-            MessageBox.Show("nothasLock'");
             
             var count = lockCount(dataFolder);
 
@@ -209,7 +211,7 @@ public class Test
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"error: {ex.Message}");
+            MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
             return false;
         }
     }
@@ -256,7 +258,6 @@ public class Test
         
         foreach (var file in files)
         {
-            MessageBox.Show(file);
             if (!file.EndsWith(".lock"))
                 continue;
             

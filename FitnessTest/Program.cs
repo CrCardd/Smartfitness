@@ -33,7 +33,9 @@ public class MainView : View
                 Path.GetExtension(f) == ".exam"
             );
             this.test = await Test.LoadFromExamFile(file);
-            this.test.InstanceStudentName = File.ReadAllText(".name");
+            this.test.InstanceStudentName = 
+                File.ReadAllText(".name")
+                .Trim();
         }
         catch
         {

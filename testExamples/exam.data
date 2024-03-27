@@ -1,4 +1,4 @@
-DataPath = S:\COM\Human_Resources\01.Engineering_Tech_School\02.Internal\1 - Meio oficiais\2 - MEIO OFICIAL 2023\Trevisan
+DataPath = S:\COM\Human_Resources\01.Engineering_Tech_School\02.Internal\8 - Meio oficiais\2 - MEIO OFICIAL 2023\Trevisan\prova ml
 
 c1 = Conhecer o que é um Dataset
 c2 = Entender o fluxo básico de Machine Learning
@@ -7,19 +7,19 @@ c4 = Compreender o fênomeno de Underfitting
 c5 = Compreender a importância da separação dos dados em treinamento e teste
 c6 = Compreender Aprendizagem Supervisionados
 c7 = Compreender Aprendizagem Não Supervisionados
-c8 = Compreender o problema de Classificação
-c9 = Conhecer os algoritmos básicos
-c10 = Compreender o processo de Lable Enconder
-c11 = Compreender os algoritmos de Classificação
-c12 = Compreender os algoritmos de Regressão
-c13 = Compreender os algoritmos de Clusterização
-c14 = Compreender Bagging e Boosting
-c15 = Compreender Métricas de Avaliação de Performance
+c8 = Realizar análise exploratória e utilização correta dos gráficos
+c9 = Compreender os conceitos de limpeza de dados
+c10 = Aplicar o processo de Label Enconder
+c11 = Aplicar algoritmos de Classificação
+c12 = Aplicar algoritmos de Regressão
+c13 = Aplicar algoritmos de Clusterização
+c14 = Compreender Ensemble, Bagging e Boosting
+c15 = Aplicar métricas de avaliação de performance corretamente
 
 q1 = 
     Text = Aponte a alternativa incorreta sobre o conceito de DataSet:
     Competences = 
-        c1 = 8
+        c1 = 1
     
     Alternatives = 
         Um csv pode ser usado para armazenar dados de um dataset = 0
