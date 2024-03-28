@@ -105,6 +105,26 @@ public class Test
         }
     }
 
+    public void Show()
+    {
+        foreach (var comp in Competences)
+        {
+            float maxValue = 0f;
+            
+            foreach (var question in this.Questions)
+            {
+                if (!question.Competences.ContainsKey(comp))
+                    continue;
+                
+                maxValue += question.Competences[comp]
+                    * question.Alternatives.Max(a => a.Value);
+            }
+            System.Windows.Forms.MessageBox.Show(
+                $"{comp.Title} = {comp.StatusValue} / {maxValue}"
+            );
+        }
+    }
+
     public async Task Save()
     {
         if (this.Saved)

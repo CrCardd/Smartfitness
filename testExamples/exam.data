@@ -16,7 +16,7 @@ c13 = Aplicar algoritmos de Clusterização
 c14 = Compreender Ensemble, Bagging e Boosting
 c15 = Aplicar métricas de avaliação de performance corretamente
 
-q1 = 
+q1 =
     Text =
         Você recebe dados em um Json que é uma lista de objetos referentes
         a dados extraídos de um banco mongo. Em outro Json dados complementares
@@ -123,7 +123,7 @@ q7 =
         Você possui uma coluna em texto que desconhece exatamente os detalhes devido ao processo
         de obtenção de um dataset mal documentado. Qual gráfico você considera mais fácil Para
         determinar se você deve ou não aplicar um LabelEncoder na coluna:
-        
+	
     Competences =
         c8 = 1
         c9 = 1
@@ -221,17 +221,17 @@ q13 =
         apontará altos valores na matriz de confusão Para os casos A B C e D respectivamente:
     
     Images = q13.png
-
+	
     Competences = 
         c6 = 1
         c11 = 1
         c15 = 1
     
-    Alternatives = 
+    Alternatives =
         Possível Bug; Overfitting; Underfitting; Underfitting = 0
-        Sucesso; Underfitting; Possível Bug; Overfitting = 25
-        Overfitting; Overfitting; Underfitting; Underfitting = 50
-        Sucesso; Underfitting; Underfitting; Overfitting = 100
+        Overfitting; Overfitting; Underfitting; Underfitting = 25
+        Sucesso; Underfitting; Underfitting; Overfitting = 50
+        Sucesso; Underfitting; Possível Bug; Overfitting = 100
 
 q14 = 
     Text =
@@ -325,7 +325,7 @@ q19 =
         encontradas no treinamento e validação deste dataset.
     
     Images = q19.png
-
+	
     Competences =
         c3 = 1
         c12 = 1
@@ -348,10 +348,10 @@ q20 =
         c14 = 1
     
     Alternatives =
-        Boosting e Bagging são altamente paralelizáveis
-        RandomForest e ElasticNet são Ensemble
-        KMeans e DBScan são mais lentos que MiniBatchKMeans
-        KMeans e DecisionTree são algoritmos Supervisionado
+        Boosting e Bagging são altamente paralelizáveis = 30
+        RandomForest e ElasticNet são Ensemble = 30
+        KMeans e DecisionTree são algoritmos Supervisionado = 30
+        KMeans e DBScan são mais lentos que MiniBatchKMeans = 100
 
 q21 =
     Text =
@@ -365,7 +365,7 @@ q21 =
         c4 = 1
         c5 = 1
         c15 = 1
-
+    
     Alternatives =
         4/10; Overfitting = 0
         3/10; Overfitting = 25

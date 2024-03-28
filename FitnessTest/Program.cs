@@ -108,14 +108,15 @@ public class MainView : View
                         question = test.Questions[current];
                         altCount = question.Alternatives.Count;
                         
-                        var alt = question
-                            .Alternatives.Keys.ToArray()[selected];
+                        var alt = question.AlternativeTexts[selected];
                         var correctness = question.Alternatives[alt];
 
                         foreach (var comp in question.Competences.Keys)
                             comp.StatusValue += correctness
                                 * question.Competences[comp];
                         current++;
+                        
+                        // test.Show();
                     }
                     catch {
 
