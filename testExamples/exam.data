@@ -17,9 +17,15 @@ c14 = Compreender Ensemble, Bagging e Boosting
 c15 = Aplicar métricas de avaliação de performance corretamente
 
 q1 = 
-    Text = Aponte a alternativa incorreta sobre o conceito de DataSet:
+    Text =
+        Você recebe dados em um Json que é uma lista de objetos referentes
+        a dados extraídos de um banco mongo. Em outro Json dados complementares
+        que poderiam ser juntados ao primerio como uma espécie de FK. Qual sua
+        primeira ação num projeto de ML:
     Competences = 
         c1 = 1
+        c2 = 1
+        c8 = 1
     
     Alternatives = 
         Um csv pode ser usado para armazenar dados de um dataset = 0

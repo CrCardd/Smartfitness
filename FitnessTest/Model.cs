@@ -34,6 +34,7 @@ public class Question
     public List<Image> Images { get; set; }
     public Dictionary<Competence, float> Competences { get; set; }
     public Dictionary<string, float> Alternatives { get; set; }
+    public List<string> AlternativeTexts { get; set; }
 }
 
 public class Test

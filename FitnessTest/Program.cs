@@ -169,7 +169,7 @@ public class MainView : View
         }
 
         int index = 0;
-        foreach (var alt in question.Alternatives.Keys)
+        foreach (var alt in question.AlternativeTexts)
         {
             if (selected == index)
                 g.FillRectangle(5, y, g.Width - 10, jump * (alt.Length / spacing + 1), Brushes.Black);

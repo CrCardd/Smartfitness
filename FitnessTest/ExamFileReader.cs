@@ -67,6 +67,18 @@ public class ExamFileReader
 
         process(lines.GetEnumerator(), test);
 
+        test.Questions = test.Questions
+            .OrderBy(q => Random.Shared.Next())
+            .ToList();
+        
+        foreach (var question in test.Questions)
+        {
+            question.AlternativeTexts = 
+                question.Alternatives.Keys
+                .OrderBy(q => Random.Shared.Next())
+                .ToList();
+        }
+
         return test;
     }
 
