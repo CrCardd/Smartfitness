@@ -200,7 +200,9 @@ q11 =
         dropNA - LabelEncoder - Boosting - precission_score = 100
 
 q12 = 
-    Text = Aponte a questão que melhor estrutura o processod e ML:
+    Text =
+        Aponte a questão que melhor estrutura o processod e ML:
+    
     Competences = 
         c2 = 1
         c8 = 1
@@ -219,6 +221,7 @@ q13 =
         apontará altos valores na matriz de confusão Para os casos A B C e D respectivamente:
     
     Images = q13.png
+
     Competences = 
         c6 = 1
         c11 = 1
@@ -231,7 +234,9 @@ q13 =
         Sucesso; Underfitting; Underfitting; Overfitting = 100
 
 q14 = 
-    Text = Responda o mais incorreto sobre separar dados entre treino e teste:
+    Text =
+        Responda o mais incorreto sobre separar dados entre treino e teste:
+    
     Competences = 
         c3 = 1
         c4 = 1
@@ -267,6 +272,7 @@ q16 =
         específico".
         Sabendo que todas as classes tem a mesma probabilidade, qual é o accuracy_score de
         um modelo que sempre diz que "vai acontecer janeiro".
+    
     Competences = 
         c6 = 1
         c11 = 1
@@ -300,7 +306,8 @@ q18 =
         Para os próximos três problemas aponte seus nomes: 
         Descobrir se um paciente tem ou não uma doença; 
         Calcular o valor de uma ação ao longo do tempo; 
-        Identificar perfil dos usuários em uma plataforma de Streaming 
+        Identificar perfil dos usuários em uma plataforma de Streaming
+    
     Competences = 
         c11 = 1
         c12 = 1
@@ -312,3 +319,125 @@ q18 =
         Classificação; Regressão; Clusterização = 50
         Classificação; Regressão; Classificação = 100
 
+q19 =
+    Text = 
+        A respeito da imagem o que você diria sobre as dificuldades
+        encontradas no treinamento e validação deste dataset.
+    
+    Images = q19.png
+
+    Competences =
+        c3 = 1
+        c12 = 1
+        c15 = 1
+    
+    Alternatives =
+        Underfitting e erro em valores pequenos = 0
+        Underfitting e erro em valores grandes = 25
+        Overfitting e erro em valores pequenos = 50
+        Overfitting e erro em valores grandes = 100
+
+q20 =
+    Text =
+        Marque a alternativa que apresenta 100% de verdades ou
+        100% de mentiras.
+    
+    Competences =
+        c7 = 1
+        c13 = 1
+        c14 = 1
+    
+    Alternatives =
+        Boosting e Bagging são altamente paralelizáveis
+        RandomForest e ElasticNet são Ensemble
+        KMeans e DBScan são mais lentos que MiniBatchKMeans
+        KMeans e DecisionTree são algoritmos Supervisionado
+
+q21 =
+    Text =
+        Ao finalizar treinamentos e validações, nos dados de
+        testes você obteve a seguinte matriz de confusão: newline
+        10 20 newline
+        40 30 newline
+        Aponte o Recall Score e sua conclusão sobre o treinamento:
+    
+    Competences =
+        c4 = 1
+        c5 = 1
+        c15 = 1
+
+    Alternatives =
+        4/10; Overfitting = 0
+        3/10; Overfitting = 25
+        1/2; Underfitting = 50
+        3/7; Underfitting = 100
+
+q22 =
+    Text =
+        Para os seguinte problema, aponte um algoritmo e uma métrica:
+        Calcula a probabilidade de uma doença sempre apontando a presença
+        da doença quando ela existe.
+    
+    Competences =
+        c11 = 1
+        c12 = 1
+        c13 = 1
+        c15 = 1
+    
+    Alternatives =
+        SVR; accuracy_score = 0
+        SVC; precision_score = 40
+        SVC; accuracy_score = 60
+        DecisionTree; recall_score = 100
+
+q23 =
+    Text =
+        Para os seguinte problema, aponte um algoritmo e uma métrica:
+        Encontrar todos os vinhos de alta qualidade no catalogo e
+        garantindo que apenas vinhos bons sejam selecionados.
+    
+    Competences =
+        c11 = 1
+        c12 = 1
+        c13 = 1
+        c15 = 1
+    
+    Alternatives =
+        SVR; accuracy_score = 0
+        SVC; precision_score = 40
+        DecisionTree; accuracy_score = 60
+        SVC; recall_score = 100
+
+q24 =
+    Text =
+        Para os seguinte problema, aponte um algoritmo e uma métrica:
+        Calcular o preço de uma ação, não se importando com um erro
+        constante mas evitar erros absurdos.
+    
+    Competences =
+        c11 = 1
+        c12 = 1
+        c13 = 1
+        c15 = 1
+    
+    Alternatives =
+        SVR; mean_error = 20
+        DecisionTreeRegressor; mean_error = 20
+        SVC; squared_mean_error = 60
+        SVR; squared_mean_error = 100
+
+q25 =
+    Text =
+        Você recebe um dataset com os campos sobre o estado de carros no sol
+        que causaram falhas devido ao calor. Você tem as seguintes colunas:
+        Temperatura no Teto (Externo); Temperatura no Capo (Externo); Marca.
+        Escolha dois gráficos que podem revelar mais informações para você.
+    
+    Competences =
+        c8 = 1
+    
+    Alternatives =
+        Gráfico de Pizza, apenas = 0
+        Histograma + Boxplot = 50
+        ScatterPlot + Boxplot = 50
+        ScatterPlot + Histograma = 100
