@@ -151,7 +151,7 @@ public class Test
             
             var competence = Competences
                 .FirstOrDefault(c => c.Title == line[0]);
-            line.Add(competence.Status.ToString());
+            line.Add(competence.StatusValue.ToString());
         }
 
         await setCsv(csv, filePath);
