@@ -1,0 +1,312 @@
+DataPath = S:\COM\Human_Resources\01.Engineering_Tech_School\02.Internal\8 - Meio oficiais\4 - MEIO OFICIAL 2025\Cristian Cardoso\Senai\avalia_senai\LogicaProgramacao
+
+c1 = Compreender fluxogramas e algoritmos
+c2 = Compreender I/O
+c3 = Compreender condicionais
+c4 = Compreender operadores lógicos
+c5 = Compreender estruturas de repetição
+c6 = Compreender o conceito de recurisividade
+c7 = Compreender diferentes algoritmos de ordenação
+c8 = Compreender o funcionamento de ponteiro
+c9 = Compreender memória stack e heap
+c10 = Compreender o alocação de memória
+c11 = Ler e compreender outros códigos
+c12 = Compreender conceito de estruturas de dados
+
+q1 = 
+    Text = 
+        Considere que a variável x tem guarda o valor 4, e seu endereço é 37:
+        O que vai ser impresso?
+    Images = q1.png
+    Competences = 
+        c8 = 1
+    
+    Alternatives = 
+        O endereço de z = 0
+        O endereço de y = 0
+        O valor de x = 0
+        O endereço de x = 5
+
+
+q2 = 
+    Text = 
+        Um ano é bissexto se for divisível por 4, exceto quando for um ano centenário. Nesses casos, o ano só é bissexto se também for divisível por 400
+    Images = q2.png
+    Competences = 
+        c4 = 1
+    
+    Alternatives = 
+        a) = 0
+        b) = 5
+        c) = 0
+        d) = 0
+
+
+q3 = 
+    Text =
+        Sabendo que:
+        Last In = LI, Last Out = LO, FIrst In = FI, First Out = FO.
+        Marque aquela que representa respectivamente Stack e Queue:
+    Competences =
+        c12 = 1
+    
+    Alternatives = 
+        LIFO, FIFO = 5
+        FIFO, LIFO = 0
+        LIFO, LIFO = 0
+        FIFO, FIFO = 0
+
+q4 = 
+    Text = 
+        Considere um compilador x64 e analise o código. Quantos bytes de memória serão alocados no total após a construção de "A"?
+    Images = q4.png
+    Competences = 
+        c5 = 1
+        c10 = 1
+        c11 = 1
+    
+    Alternatives = 
+        300 = 5
+        260 = 5
+        220 = 1
+        250 = 0
+
+q5 = 
+    Text = 
+        Análise o código e informe o que será impresso no terminal:
+    Images = q5.png
+    Competences = 
+        c6 = 1
+        c5 = 1
+        c11 = 1
+    
+    Alternatives = 
+        a) = 1
+        b) = 0
+        c) = 5
+        d) = 0
+
+q6 = 
+    Text = 
+        O que a função funcao(...) valida?
+    Images = q6.png
+    Competences = 
+        c5 = 1 
+        c6 = 1
+        c10 = 1
+        c11 = 1
+        c3 = 1
+    
+    Alternatives = 
+        Se dois nós estão diretamente ligados (A → B em apenas uma aresta) = 0 
+        Se existe algum caminho (direto ou indireto) que conecta A a B no grafo = 5
+        Se o nó A tem pelo menos o mesmo número de vizinhos que B = 0
+        Se todos os caminhos possíveis que partem de A terminam obrigatoriamente em B = 0
+
+q7 = 
+    Text = 
+        Qual das seguintes funções representa corretamente um selection sort:
+    Images = q7.png
+    Competences = 
+        c5 = 1
+        c7 = 1
+        c11 = 1
+    
+    Alternatives = 
+        a) = 0
+        b) = 5
+        c) = 0
+        d) = 0
+
+q8 = 
+    Text =
+        Considerando ponteiros, qual das alternativa abaixo printa 34:
+    Images = q8.png
+    Competences = 
+        c8 = 1
+    
+    Alternatives = 
+        a) = 0
+        b) = 1
+        c) = 5
+        d) = 0
+
+q9 = 
+    Text =
+        Considerando que no endereço 11 existe o valor 41, e no endereço 41 existe o valor 111, e que a variável x aponta para esse 111 avalie a seguinte expressão:
+    
+        int* i = 11;
+        int* j = *i;
+        int k = *j;
+        print(k + &x);
+    Competences = 
+        c8 = 1
+        c11 = 1
+    
+    Alternatives = 
+        222 = 0
+        152 = 5
+        82 = 0
+        53 = 0
+
+q10 = 
+    Text = 
+        Imagine uma desenvolvedora que está utilizando C precisa precisa armazenar seus dados em um vetor A mas não sabe a quantos 
+        ados serão, mas também precisa de um outro vetor B com o tamanho fixo em 10. Portanto para o vetor com tamanho desconhecido 
+        ela tem a variável length. 
+        Qual das alternativas demonstra como ela deve fazer o vetor A: 
+        
+        int length = 0;
+        scanf(" %d", &length);
+    
+    Images = q10.png
+    Competences = 
+        c10 = 1 
+    
+    Alternatives = 
+        a) = 0
+        b) = 5
+        c) = 0
+        d) = 0
+
+q11 = 
+    Text =
+        Imagine uma desenvolvedora que está utilizando C precisa precisa armazenar seus dados em um vetor A mas não sabe a quantos 
+        ados serão, mas também precisa de um outro vetor B com o tamanho fixo em 10. Portanto para o vetor com tamanho desconhecido 
+        ela tem a variável length.        
+        Qual das alternativas demonstra como ela deve fazer o vetor B:
+    Images = q11.png
+    Competences = 
+        c10 = 1
+    
+    Alternatives =
+        a) = 5
+        b) = 1
+        c) = 0 
+        d) = 0
+
+q12 = 
+    Text = 
+        Imagine uma desenvolvedora que está utilizando C precisa precisa armazenar seus dados em um vetor A mas não sabe a quantos 
+        ados serão, mas também precisa de um outro vetor B com o tamanho fixo em 10. Portanto para o vetor com tamanho desconhecido 
+        ela tem a variável length.
+        Qual das alternativas demonstra como ela deve liberar a memória:
+    
+    Images = q12.png
+    
+    Competences = 
+        c10 = 1
+    
+    Alternatives = 
+        a) = 0
+        b) = 0
+        c) = 5
+        d) = 0
+
+q13 = 
+    Text = Resolva:
+    Images = q13.png
+    Competences = 
+        c4 = 1  
+    
+    Alternatives = 
+        34 = 0
+        2 = 0
+        18 = 1
+        1 = 5
+        3 = 0
+
+q14 = 
+    Text = Resolva:
+    Images = q14.png
+    Competences = 
+        c4 = 1  
+    
+    Alternatives = 
+        21 = 0
+        4294967296 = 1
+        1 = 0
+        -1 = 5
+        20 = 0
+
+q15 = 
+    Text = Resolva:
+    Images = q15.png
+    Competences = 
+        c4 = 1
+    
+    Alternatives = 
+        2 = 1
+        4 = 0
+        1 = 5
+        0 = 0
+        10 = 0 
+
+q16 = 
+    Text = 
+        Considere uma Stack:
+    Images = q16.png
+    Competences = 
+        c12 = 1
+    
+    Alternatives = 
+        {3,4,5,6,7} = 0
+        {7,5,4,2,1,0} = 0
+        {7,6,5,4,3,2} = 0
+        {2,1,0,4,5,7} = 5
+
+q17 = 
+    Text = 
+        Considerando os códigos a seguir, qual deles retorna i sendo 13?
+    Images = q17.png
+    Competences = 
+        c5 = 1
+        c11 = 1
+    
+    Alternatives = 
+        a) = 0
+        b) = 0
+        c) = 5
+        d) = 0
+
+q18 = 
+    Text = 
+        funcao(10) = ?
+    Images = q18.png
+    Competences = 
+        c6 = 1
+        c2 = 1
+        c11 = 1
+    
+    Alternatives = 
+        22 = 5
+        18 = 0
+        21 = 0
+        12 = 0
+
+q19 = 
+    Text = 
+        Hornet tem o seguinte vetor com os valores das bestas que ela matou:
+        { 6, 1, 10, 14, 2, 52, 9, 7 }
+        Ela deseja utilizar um bubble sort para ordena-lo, após duas iterações completas, qual será a ordem do array?
+    Competences = 
+        c7 = 1
+    
+    Alternatives = 
+        {1,6,2,10,9,7,14,52} = 5
+        {1,2,10,14,6,52,9,7} = 0
+        {1,2,6,7,9,10,14,52} = 0
+        {1,6,10,2,14,9,7,52} = 1
+
+q20 = 
+    Text = 
+        Sobre stack e heap, assinale a alternativa correta:
+    Competences = 
+        c9 = 1
+        c10 = 1
+    
+    Alternatives = 
+        A stack armazena objetos de tempo de execução dinâmico, e a heap armazena variáveis locais com escopo limitado = 0
+        A stack gerencia memória de forma automática com base no escopo das variáveis, enquanto a heap exige alocação e liberação manual = 5
+        Variáveis na heap são destruídas automaticamente quando saem de escopo, enquanto variáveis na stack precisam ser liberadas manualmente = 0
+        A stack cresce de forma dinâmica durante a execução do programa, e a heap tem tamanho fixo definido pelo compilador = 0

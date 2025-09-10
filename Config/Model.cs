@@ -148,7 +148,7 @@ public class Test
         if (!Directory.Exists(dataFolder))
             Directory.CreateDirectory(dataFolder);
 
-        var file = Path.Combine(dataFolder, "result.csv");
+        var file = Path.Combine(dataFolder, $"{InstanceStudentName}.csv");
 
         await commit(dataFolder, async () => await save(file));
     }

@@ -3,7 +3,6 @@
 
 HHOOK hHook;
 
-// Função que decide se a tecla deve ser bloqueada
 BOOL IsAllowedKey(DWORD vkCode) {
     switch (vkCode) {
         case VK_LEFT:
@@ -23,14 +22,13 @@ BOOL IsAllowedKey(DWORD vkCode) {
     }
 }
 
-
 LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode == HC_ACTION) {
         KBDLLHOOKSTRUCT *p = (KBDLLHOOKSTRUCT*)lParam;
 
         if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
             if (!IsAllowedKey(p->vkCode)) {
-                return 1;
+                return 1; // bloqueia tecla
             }
         }
     }
@@ -38,10 +36,18 @@ LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
 }
 
 int main() {
+    RECT rect;
+    rect.left   = GetSystemMetrics(SM_CXSCREEN) - 1; 
+    rect.top    = 0;                                 
+    rect.right  = GetSystemMetrics(SM_CXSCREEN);     
+    rect.bottom = 1;                                 
+    ClipCursor(&rect);
+
+    // --- hook do teclado ---
     hHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, NULL, 0);
     if (!hHook)
         return 1;
-    
+
     MSG msg;
     while (GetMessage(&msg, NULL, 0, 0)) {
         TranslateMessage(&msg);
@@ -49,5 +55,6 @@ int main() {
     }
 
     UnhookWindowsHookEx(hHook);
+    ClipCursor(NULL);
     return 0;
 }

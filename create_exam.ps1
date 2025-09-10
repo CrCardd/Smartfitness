@@ -1,5 +1,5 @@
-$folder = ".\lp_exam"
-$zipped = ".\lp.zip"
+$folder = ".\$args"
+$zipped = ".\$args.zip"
 
 Compress-Archive -Path "$folder\*" -DestinationPath $zipped -Force
 
