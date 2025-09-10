@@ -3,6 +3,6 @@ $zipped = ".\$args.zip"
 
 Compress-Archive -Path "$folder\*" -DestinationPath $zipped -Force
 
-Move-Item .\lp.zip .\lp.exam -Force
+Move-Item .\$args.zip .\$args.exam -Force
 
 dotnet run
