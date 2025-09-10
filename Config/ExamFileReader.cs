@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 public class ExamFileReader
 {
-    private string data;
+    private string? Data;
 
     public static async Task<ExamFileReader> Open(string path)
     {
@@ -45,7 +45,7 @@ public class ExamFileReader
                 var code = await sr.ReadToEndAsync();
                 sr.Close();
                 stream.Close();
-                reader.data = code;
+                reader.Data = code;
                 continue;
             }
         }
@@ -62,7 +62,10 @@ public class ExamFileReader
             Questions = new()
         };
 
-        IEnumerable<string> lines = data.Split('\n');
+        if (this.Data is null)
+            throw new Exception("Data is null");
+
+        IEnumerable<string> lines = Data.Split('\n');
         var it = lines.GetEnumerator();
 
         process(lines.GetEnumerator(), test);

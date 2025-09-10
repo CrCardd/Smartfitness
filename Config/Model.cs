@@ -9,6 +9,16 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Csv = System.Collections.Generic.List<
     System.Collections.Generic.List<string>>;
+using Pamella;
+
+public static class Context
+{
+    public static Test Test;
+    public static Action<Input> KeyDownEvent;
+    public static Action<Input> KeyUpEvent;
+    public static Dictionary<string, int> AlternativesSelected { get; set; } = new();
+    public static TimeOnly StartTime;
+}
 
 public enum CompetenceStatus
 {
@@ -30,41 +40,41 @@ public class Competence
 
 public class Question
 {
-    public string Text { get; set; }
-    public List<Image> Images { get; set; }
-    public Dictionary<Competence, float> Competences { get; set; }
-    public Dictionary<string, float> Alternatives { get; set; }
-    public List<string> AlternativeTexts { get; set; }
+    public string Text { get; set; } = "";
+    public List<Image> Images { get; set; } = [];
+    public Dictionary<Competence, float> Competences { get; set; } = [];
+    public Dictionary<string, float> Alternatives { get; set; } = [];
+    public List<string> AlternativeTexts { get; set; } = [];
 }
 
 public class Test
 {
-    private string code;
+    private readonly string Code;
     public bool Saved { get; set; } = false;
     public bool Finished { get; set; } = false;
-    public string DataPath { get; set; }
-    public string InstanceStudentName { get; set; }
-    public List<Question> Questions { get; set; }
-    public List<Competence> Competences { get; set; }
+    public string? DataPath { get; set; }
+    public string InstanceStudentName { get; set; } = "tester";
+    public List<Question> Questions { get; set; } = [];
+    public List<Competence> Competences { get; set; } = [];
 
     public Test()
     {
         byte[] bytes = new byte[12];
         Random.Shared.NextBytes(bytes);
-        this.code = Convert.ToBase64String(bytes)
+        this.Code = Convert.ToBase64String(bytes)
             .ToLower()
             .Replace("+", "")
             .Replace("/", "")
             .Replace("=", "");
     }
 
-    public static async Task<Test> LoadFromExamFile(string path)
+    public static async Task<Test?> LoadFromExamFile(string path)
     {
         try
         {
             if (!File.Exists(path))
                 return null;
-            
+
             ExamFileReader fileReader = await ExamFileReader.Open(path);
             return fileReader.GetTest();
         }
@@ -84,12 +94,12 @@ public class Test
         foreach (var comp in Competences)
         {
             float maxValue = 0f;
-            
+
             foreach (var question in this.Questions)
             {
                 if (!question.Competences.ContainsKey(comp))
                     continue;
-                
+
                 maxValue += question.Competences[comp]
                     * question.Alternatives.Max(a => a.Value);
             }
@@ -110,12 +120,12 @@ public class Test
         foreach (var comp in Competences)
         {
             float maxValue = 0f;
-            
+
             foreach (var question in this.Questions)
             {
                 if (!question.Competences.ContainsKey(comp))
                     continue;
-                
+
                 maxValue += question.Competences[comp]
                     * question.Alternatives.Max(a => a.Value);
             }
@@ -131,11 +141,14 @@ public class Test
             return;
         this.Saved = true;
 
-        var dataFolder = Path.Combine(this.DataPath, "fitness");
+        if (this.DataPath is null)
+            throw new Exception("there is no csv path");
+
+        var dataFolder = this.DataPath;
         if (!Directory.Exists(dataFolder))
             Directory.CreateDirectory(dataFolder);
 
-        var file = Path.Combine(dataFolder, "test.csv");
+        var file = Path.Combine(dataFolder, "result.csv");
 
         await commit(dataFolder, async () => await save(file));
     }
@@ -148,9 +161,12 @@ public class Test
         for (int i = 1; i < csv.Count; i++)
         {
             var line = csv[i];
-            
+
             var competence = Competences
                 .FirstOrDefault(c => c.Title == line[0]);
+            if (competence is null)
+                return;
+
             line.Add(competence.StatusValue.ToString());
         }
 
@@ -191,7 +207,7 @@ public class Test
 
     private void initCsv(Csv csv)
     {
-        csv.Add(new () { "Competências" });
+        csv.Add(new() { "Competências" });
         foreach (var c in this.Competences)
         {
             csv.Add(new() {
@@ -224,7 +240,7 @@ public class Test
     {
         try
         {
-            var file = InstanceStudentName + code + ".lock";
+            var file = InstanceStudentName + Code + ".lock";
             var location = Path.Combine(dataFolder, file);
             File.Delete(location);
             return true;
@@ -254,10 +270,10 @@ public class Test
             var hasLock = searchLock(dataFolder);
             if (hasLock)
                 return false;
-            
+
             var count = lockCount(dataFolder);
 
-            var file = InstanceStudentName + code + ".lock";
+            var file = InstanceStudentName + Code + ".lock";
             var location = Path.Combine(dataFolder, file);
             await File.WriteAllTextAsync(location, "");
             return true;
@@ -276,7 +292,7 @@ public class Test
             var priority = hasPriority(dataFolder);
             if (priority)
                 break;
-            
+
             await Task.Delay(50);
         }
     }
@@ -285,20 +301,20 @@ public class Test
     {
         List<string> locks = new List<string>();
         var files = Directory.GetFiles(dataFolder);
-        
+
         foreach (var file in files)
         {
             if (!file.EndsWith(".lock"))
                 continue;
-            
+
             locks.Add(file);
         }
         if (locks.Count == 0)
             return true;
-        
+
         locks.Sort();
         var bestPriority = locks[0];
-        return bestPriority.Contains(InstanceStudentName + code);
+        return bestPriority.Contains(InstanceStudentName + Code);
     }
 
     private bool searchLock(string dataFolder)
@@ -308,12 +324,12 @@ public class Test
     {
         int count = 0;
         var files = Directory.GetFiles(dataFolder);
-        
+
         foreach (var file in files)
         {
             if (!file.EndsWith(".lock"))
                 continue;
-            
+
             count++;
         }
 
