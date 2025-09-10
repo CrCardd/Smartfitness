@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ public class ResultView : View
                 case Input.Escape:
                     {
                         App.Close();
+                        foreach (var proc in Process.GetProcessesByName("SmartfitinessLock"))
+                            proc.Kill();
                         break;
                     }
             }

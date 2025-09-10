@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,17 @@ public class StartView : View
             ?? throw new Exception("Test is null");
 
         Context.Test = test;
+
+
+        ProcessStartInfo psi = new ProcessStartInfo
+        {
+            FileName = "./SmartfitinessLock.exe",      
+            UseShellExecute = false,     
+            CreateNoWindow = true,       
+            WindowStyle = ProcessWindowStyle.Hidden
+        };
+        Process process = new Process { StartInfo = psi };
+        process.Start();
 
         AlwaysInvalidateMode();
         Action<Input> KDE = key =>
