@@ -10,7 +10,6 @@ using Pamella;
     Brush? textBrush = null
 ) : View
 {
-    private bool Waiting = false;
     private bool Go = false;
     private TimeSpan Start;
     protected override void OnStart(IGraphics g)
@@ -38,7 +37,7 @@ using Pamella;
     }
     protected override void OnRender(IGraphics g)
     {   
-        g.Clear(color == null ? Color.White : (Color)color);
+        g.Clear(color == null ? Context.BackgroundColor : (Color)color);
 
         bool shouldGo = (TimeOnly.FromDateTime(DateTime.Now).ToTimeSpan() - this.Start).TotalSeconds > 2;
         if (shouldGo)

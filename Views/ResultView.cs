@@ -34,7 +34,7 @@ public class ResultView : View
 
     protected override async void OnRender(IGraphics g)
     {
-        g.Clear(Color.LightSteelBlue);
+        g.Clear(Context.BackgroundColor);
         int index = 0;
 
         if (!this.HasCalculated)

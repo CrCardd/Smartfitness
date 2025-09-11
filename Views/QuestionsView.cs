@@ -23,7 +23,7 @@ public class QuestionsView : View
         g.UnsubscribeKeyUpEvent(Context.KeyUpEvent);
         Action<Input> KDE = key =>
         {
-            var question = Context.Test.Questions[this.Current];
+            var question = Context.Test.Questions[Context.Current];
 
             switch (key)
             {
@@ -45,28 +45,28 @@ public class QuestionsView : View
                     }
                 case Input.Left:
                     {
-                        if (this.Current == 0)
+                        if (Context.Current == 0)
                             break;
                         if (this.ShowImage)
                             break;
-                        this.Current--;
+                        Context.Current--;
                         break;
                     }
                 case Input.Right:
                     {
-                        if (this.Current == Context.Test.Questions.Count - 1)
+                        if (Context.Current == Context.Test.Questions.Count-1)
                             break;
                         if (this.ShowImage)
                             break;
-                        this.Current++;
+                        Context.Current++;
                         break;
                     }
                 case Input.Enter:
                     {
                         var alt = question.AlternativeTexts[this.AlternativeSelected];
-                        Context.AlternativesSelected[this.Current.ToString()] = this.AlternativeSelected;
-                        if (this.Current != Context.Test.Questions.Count - 1)
-                            this.Current++;
+                        Context.AlternativesSelected[Context.Current.ToString()] = this.AlternativeSelected;
+                        if (Context.Current != Context.Test.Questions.Count - 1)
+                            Context.Current++;
                         break;
                     }
                 case Input.I:
@@ -84,11 +84,6 @@ public class QuestionsView : View
                         this.Jump++;
                         break;
                     }
-                case Input.F:
-                    {
-                        App.Push(new JumpView(new ResultView(), Input.F, "FINALIZAR", Color.DarkGray));
-                        return;
-                    }
             }
         };
         Context.KeyDownEvent = KDE;
@@ -97,8 +92,8 @@ public class QuestionsView : View
 
     protected override void OnRender(IGraphics g)
     {
-        g.Clear(Color.LightSteelBlue);
-        var question = Context.Test.Questions[this.Current];
+        g.Clear(Context.BackgroundColor);
+        var question = Context.Test.Questions[Context.Current];
         var font = new Font("Arial", 30);
 
         g.DrawText(
@@ -110,7 +105,7 @@ public class QuestionsView : View
         g.DrawText(
             new Rectangle(10, 10, g.Width - 10, g.Height - 10),
             font, StringAlignment.Near, StringAlignment.Near,
-            $"{this.Current + 1}/{Context.Test.Questions.Count}"
+            $"{Context.Current + 1}/{Context.Test.Questions.Count}"
         );
 
         TimeSpan endts = Context.StartTime.AddHours(2).ToTimeSpan();
@@ -153,12 +148,12 @@ public class QuestionsView : View
         foreach (var alt in question.AlternativeTexts)
         {
             if (this.AlternativeSelected == index)
-                g.FillRectangle(30, y, g.Width - 60, this.Jump * (alt.Length / this.Spacing + 1), Brushes.PaleTurquoise);
+                g.FillRectangle(30, y, g.Width - 60, this.Jump * (alt.Length / this.Spacing + 1), Brushes.DarkGoldenrod);
             g.DrawText(
                 new Rectangle(40, y, g.Width - 40, g.Height - y - 5),
                 font, StringAlignment.Near, StringAlignment.Near,
-                Context.AlternativesSelected.Keys.Any(a => a == this.Current.ToString()) && Context.AlternativesSelected[this.Current.ToString()] == index
-                    ? Brushes.Chocolate
+                Context.AlternativesSelected.Keys.Any(a => a == Context.Current.ToString()) && Context.AlternativesSelected[Context.Current.ToString()] == index
+                    ? Brushes.White
                     : this.AlternativeSelected == index
                         ? Brushes.Black
                         : Brushes.Black

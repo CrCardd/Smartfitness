@@ -13,15 +13,15 @@ public class StartView : View
     {
         ProcessStartInfo psi = new ProcessStartInfo
         {
-            FileName = "./SmartfitinessLock.exe",      
-            UseShellExecute = false,     
-            CreateNoWindow = true,       
+            FileName = "./SmartfitinessLock.exe",
+            UseShellExecute = false,
+            CreateNoWindow = true,
             WindowStyle = ProcessWindowStyle.Hidden
         };
         Process process = new Process { StartInfo = psi };
         process.Start();
-        
-        
+
+
         g.UnsubscribeKeyDownEvent(Context.KeyDownEvent);
         g.UnsubscribeKeyUpEvent(Context.KeyUpEvent);
 
@@ -50,7 +50,7 @@ public class StartView : View
             new RectangleF(0, 0, g.Width, g.Height),
             Bitmap.FromFile("./Start.png")
         );
-        
+
         g.DrawText(
                 new Rectangle(5, 500, g.Width - 10, g.Height - 10),
                 new Font("Arial", 20), StringAlignment.Center, StringAlignment.Near,

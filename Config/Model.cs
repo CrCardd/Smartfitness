@@ -18,6 +18,8 @@ public static class Context
     public static Action<Input> KeyUpEvent;
     public static Dictionary<string, int> AlternativesSelected { get; set; } = new();
     public static TimeOnly StartTime;
+    public static int Current = 0;
+    public static Color BackgroundColor { get; set; } = Color.DimGray;
 }
 
 public enum CompetenceStatus
