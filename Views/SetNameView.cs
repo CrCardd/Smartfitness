@@ -5,13 +5,15 @@ using System.Linq;
 using Pamella;
 
 App.Open<SetNameView>();
-public class SetNameView : View
+public class SetNameView     : View
 {
     private string Name = "";
     private bool Flick = false;
     protected override async void OnStart(IGraphics g)
     {
-        var crrPath = Environment.CurrentDirectory;
+        var crrPath = Environment.GetEnvironmentVariable("SENAI_EXAM")
+            ?? throw new Exception("'SENAI_EXAM' is not defined");
+        
         var files = Directory.GetFiles(crrPath);
         var file = files.FirstOrDefault(f =>
             Path.GetExtension(f) == ".exam"

@@ -84,6 +84,11 @@ public class QuestionsView : View
                         this.Jump++;
                         break;
                     }
+                case Input.F:
+                    {
+                        App.Push(new JumpView(new ResultView(), Input.F, "FINALIZAR"));
+                        return;
+                    }
             }
         };
         Context.KeyDownEvent = KDE;
