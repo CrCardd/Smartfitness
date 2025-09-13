@@ -11,18 +11,15 @@ public class SetNameView     : View
     private bool Flick = false;
     protected override async void OnStart(IGraphics g)
     {
-        var crrPath = Environment.GetEnvironmentVariable("SENAI_EXAM")
-            ?? throw new Exception("'SENAI_EXAM' is not defined");
-        
+        var crrPath = Environment.CurrentDirectory;
         var files = Directory.GetFiles(crrPath);
         var file = files.FirstOrDefault(f =>
             Path.GetExtension(f) == ".exam"
-        );
-        
-        if (file is null)
-            return;
+        )
+            ?? throw new Exception($"Test not found");
+
         var test = await Test.LoadFromExamFile(file)
-            ?? throw new Exception("Test is null");
+            ?? throw new Exception($"Test is empty");
 
         Context.Test = test;
         
@@ -85,7 +82,7 @@ public class SetNameView     : View
 
         g.DrawText(
             new Rectangle(5, g.Height / 2 - 100, g.Width - 10, 40),
-            new Font("Arial", 20), StringAlignment.Center, StringAlignment.Near,
+            new Font("Arial", 10), StringAlignment.Center, StringAlignment.Near,
             Brushes.White,
             "Digite seu nome para dar continuidade a prova:"
         );

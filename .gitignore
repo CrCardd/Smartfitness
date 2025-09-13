@@ -1,3 +1,11 @@
+# ROOT
+/*
+*.exe
 *.exam*
-bin
-obj
+*obj
+*bin
+
+# EXCEPTIONS
+!/Smartfitness/
+!/create_shortcut_exam.ps1
+!/Smartfitness/SmartfitinessLock.exe

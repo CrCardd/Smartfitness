@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using Pamella;
 
@@ -7,7 +8,9 @@ using Pamella;
     Input input,
     string text,
     Color? color = null,
-    Brush? textBrush = null
+    Brush? textBrush = null,
+    string completeText = "",
+    bool cancelNext = false
 ) : View
 {
     private bool Go = false;
@@ -24,11 +27,20 @@ using Pamella;
         Action<Input> KUE = key =>
         {
             if (key == input && this.Go)
-                App.Push(next);
+            {
+                if (!cancelNext)
+                    App.Push(next);
+            }
             if (key == input && !this.Go)
             {
                 g.SubscribeKeyDownEvent(Context.KeyDownEvent);
                 App.Pop();
+            }
+            if (key == Input.Escape && cancelNext)
+            {
+                foreach (var proc in Process.GetProcessesByName("SmartfitinessLock"))
+                    proc.Kill();
+                App.Close();
             }
         };
 
@@ -47,7 +59,7 @@ using Pamella;
             new Rectangle(0, 0, g.Width, g.Height),
             new Font("Arial", 50), StringAlignment.Center, StringAlignment.Center,
             textBrush == null ? Brushes.Black : textBrush,
-            shouldGo ? $"Solte a tecla para {text}" : $"Mantenha pressionado para {text}"
+            cancelNext ? completeText : (shouldGo ? $"Solte a tecla para {text}" : $"Mantenha pressionado para {text}")
         );
     }
 }
