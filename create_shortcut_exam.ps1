@@ -3,7 +3,7 @@ $abspath = (Get-Location).Path
 
 New-Item -Path (".\" + $path + "\details") -ItemType Directory > $null
 
-New-Item -Path (".\" + $path + "\details\exam.data") -Value "DataPath = $abspath\$args" > $null
+New-Item -Path (".\" + $path + "\details\exam.data") -Value "DataPath = ../" > $null
 
 New-Item -Path (".\" + $path + "\compress_to_exam.ps1") -Value @'
 $folder = ".\details"
