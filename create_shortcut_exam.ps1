@@ -16,7 +16,7 @@ Move-Item $zipped .\.exam -Force
 $batabspath = $abspath + "\" + $args + "\exam"
 
 New-Item -Path (".\" + $path + "\.ps1") -Value @"
-Set-Location $batabspath > `$null
+Set-Location "$batabspath" > `$null
 & ../../Smartfitness/Smartfitness.exe > `$null
 "@ > $null
 
@@ -27,7 +27,7 @@ New-Item -Path "./short_cut.c" -Value @"
 #include <stdlib.h>
 
 int main() {
-    system("powershell.exe \"$batabspath\\.ps1\""); 
+    system("powershell.exe \"& '$batabspath\\.ps1'\""); 
     return 0;
 }
 "@ > $null
